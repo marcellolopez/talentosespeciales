@@ -32,6 +32,7 @@
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/login">Ingresar</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/register">Registrar</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/profile">Perfil</a></li>
                     </ul>
                     <button class="btn btn-primary rounded-pill px-3 mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#feedbackModal">
                         <span class="d-flex align-items-center">

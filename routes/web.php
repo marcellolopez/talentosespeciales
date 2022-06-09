@@ -19,3 +19,5 @@ Route::get('/usuario/login', 'IndexController@login');
 
 Route::get('/usuario/register', 'IndexController@register');
 
+Route::get('/usuario/profile', 'IndexController@profile');
+

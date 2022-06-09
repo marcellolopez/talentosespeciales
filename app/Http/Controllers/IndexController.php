@@ -18,4 +18,8 @@ class IndexController extends Controller
         return view('usuario.register');
     } 
 
+    public function profile(){
+        return view('usuario.profile');
+    }     
+
 }
