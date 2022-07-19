@@ -15,7 +15,11 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'usuarios',
+    ],
+    'empresas' => [
+        'guard' => 'empresa',
+        'passwords' => 'empresas',
     ],
 
     /*
@@ -38,7 +42,11 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'usuarios',
+        ],
+        'empresa' => [
+            'driver' => 'session',
+            'provider' => 'empresas',
         ],
     ],
 
@@ -60,10 +68,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'usuarios' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Usuario::class,
         ],
+        'empresas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Empresa::class,
+        ],        
 
         // 'users' => [
         //     'driver' => 'database',
@@ -85,15 +97,22 @@ return [
     | they have less time to be guessed. You may change this as needed.
     |
     */
-
+    
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'usuarios',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'empresas' => [
+            'provider' => 'empresas',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

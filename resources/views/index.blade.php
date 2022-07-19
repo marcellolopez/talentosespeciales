@@ -30,7 +30,8 @@
                     <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#features">Features</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="#download">Download</a></li>
-                        <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/login">Ingresar</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/login">Postulante</a></li>
+                        <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('empresa/')}}/login">Empresa</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/register">Registrar</a></li>
                         <li class="nav-item"><a class="nav-link me-lg-3" href="{{url('usuario/')}}/profile">Perfil</a></li>
                     </ul>

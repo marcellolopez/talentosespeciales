@@ -29,6 +29,21 @@
   <!-- Template Main CSS File -->
   <link href="{{url('/')}}/assets/css/style.css" rel="stylesheet">
 
+  <style>
+  ::-webkit-scrollbar {
+      width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  }  
+  </style>
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/

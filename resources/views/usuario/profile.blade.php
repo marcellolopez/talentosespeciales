@@ -3,60 +3,70 @@
 @section('content')
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Multi Columns Form</h5>
+              <h5 class="card-title">Mis datos</h5>
 
               <!-- Multi Columns Form -->
               <form class="row g-3">
-                <div class="col-md-12">
-                  <label for="inputName5" class="form-label">Your Name</label>
-                  <input type="text" class="form-control" id="inputName5">
-                </div>
                 <div class="col-md-6">
-                  <label for="inputEmail5" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail5">
+                  <label for="" class="form-label">Nombres</label>
+                  <input type="text" class="form-control" id="nombres" name="nombres" value="{{old('nombres', $user->nombres)}}">
                 </div>
-                <div class="col-md-6">
-                  <label for="inputPassword5" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="inputPassword5">
+                <div class="col-md-3">
+                  <label for="" class="form-label">Apellido Paterno</label>
+                  <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="{{old('apellido_paterno', $user->apellido_paterno)}}">
                 </div>
-                <div class="col-12">
-                  <label for="inputAddress5" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddres5s" placeholder="1234 Main St">
-                </div>
-                <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity">
+                <div class="col-md-3">
+                  <label for="" class="form-label">Apellido Paterno</label>
+                  <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="{{old('apellido_materno', $user->apellido_materno)}}">
                 </div>
                 <div class="col-md-4">
-                  <label for="inputState" class="form-label">State</label>
-                  <select id="inputState" class="form-select">
-                    <option selected>Choose...</option>
-                    <option>...</option>
+                  <label for="" class="form-label">Fecha de nacimiento</label>
+                  <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="" value="{{old('fecha_nacimiento', $user->fechaNacimiento())}}">
+                </div>
+                <div class="col-md-4">
+                  <label for="" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{old('email', $user->email)}}">
+                </div>
+                <div class="col-md-4">
+                  <label for="inputAddress5" class="form-label">Número de contacto</label>
+                  <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1">+56</span>
+                      <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="telefono" name="telefono" value="{{old('telefono', $user->telefono)}}">
+                    </div>
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Dirección</label>
+                  <input type="text" class="form-control"  placeholder="" id="direccion" name="direccion"value="{{old('direccion', $user->direccion)}}">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">Región</label>
+                  <select id="region" name="region" class="form-select regiones">
+                    @foreach($regiones as $region)
+                    <option value="{{$region->region_id}}">{{$region->region_nombre}}</option>
+                    @endforeach
                   </select>
                 </div>
-                <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
+                <div class="col-md-6">
+                  <label for="inputState" class="form-label">Comúna</label>
+                  <select id="comuna" name="comuna" class="form-select comunas">
+                    <option selected></option>
+                    <option>...</option>
+                  </select>
                 </div>
                 <div class="col-12">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck">
                     <label class="form-check-label" for="gridCheck">
-                      Check me out
+                      Deseo compartir mis datos con <a href="">talentosespeciales.cl</a> para que las empresas me encuentren
                     </label>
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
               </form><!-- End Multi Columns Form -->
 
@@ -68,4 +78,8 @@
 
       </div>
     </section>
+@endsection
+
+@section('jsScripts')
+  @include('js.js_getComunas')
 @endsection

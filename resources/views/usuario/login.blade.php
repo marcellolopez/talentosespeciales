@@ -63,21 +63,21 @@
                     <p class="text-center small">Enter your username & password to login</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" novalidate>
-
+                  <form class="row g-3 needs-validation" action="{{url('/usuario/login')}}" method="POST">
+                    @csrf <!-- {{ csrf_field() }} -->
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
+                      <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <!--<span class="input-group-text" id="inputGroupPrepend">@</span>-->
+                        <input type="email" name="email" class="form-control" id="email" required>
+                        <div class="invalid-feedback">Ingrese su email</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <input type="password" name="password" class="form-control" id="password" required>
+                      <div class="invalid-feedback">Ingrese su clave</div>
                     </div>
 
                     <div class="col-12">
@@ -89,6 +89,12 @@
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
+                    @if($errors->any())
+                      <div class="alert alert-danger text-center" role="alert">
+                        <strong><i class="bi bi-exclamation-triangle"></i></strong> {{$errors->first()}}
+                      </div>
+
+                    @endif
                     <div class="col-12">
                       <p class="small mb-0">Don't have account? <a href="pages-register.html">Create an account</a></p>
                     </div>
