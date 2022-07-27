@@ -46,6 +46,9 @@ Route::get('/', 'IndexController@index');
 //Página ingreso no autorizado
 Route::get('/unauthorized', 'IndexController@unauthorized')->name('/unauthorized');
 
+//deslogearse
+Route::get('/logout', 'IndexController@logout');
+
 /**
  * Postulantes
  */
@@ -55,13 +58,20 @@ Route::post('/usuario/login', 'Auth\LoginController@authenticate')->name('/usuar
 
 Route::get('/usuario/register', 'IndexController@register');
 
-Route::get('/usuario/logout', 'IndexController@logout');
-
 Route::get('/usuario/profile', 'IndexController@profile')->name('/usuario/profile')->middleware('canAccessPostulante');
+
+Route::post('/usuario/profile', 'IndexController@updateProfile')->name('/usuario/profile')->middleware('canAccessPostulante');
 
 Route::get('/usuario/disabilities', 'IndexController@disabilities')->name('/usuario/disabilities')->middleware('canAccessPostulante');
 
-Route::get('/usuario/viewPostulationList', 'IndexController@viewPostulationList')->name('/usuario/viewPostulationList');
+/**
+ * viewPostulationList
+ * botón aviso debe contener:
+ * título
+ * nombre empresa
+ * ubicación del trabajo
+ */
+Route::get('/usuario/viewPostulationList', 'IndexController@viewPostulationList')->name('/usuario/viewPostulationList')->middleware('canAccessPostulante');
 Route::post('/usuario/ajaxViewPostulation', 'IndexController@ajaxViewPostulation')->name('/usuario/ajaxViewPostulation');
 
 
@@ -76,11 +86,21 @@ Route::post('/empresa/login', 'Auth\LoginEmpresaController@authenticate')->name(
 
 Route::get('/empresa/profile', 'IndexEmpresaController@profile')->name('/empresa/profile');
 
+/**
+ * viewCreatePostulation
+ * Agregar checkbox de habilidades aceptadas
+ * Agregrar preguntas para el postulante
+ */
 Route::get('/empresa/viewCreatePostulation', 'IndexEmpresaController@viewCreatePostulation')->name('/empresa/viewCreatePostulation');
 
 Route::post('/empresa/createPostulation', 'IndexEmpresaController@createPostulation')->name('/empresa/createPostulation');
 
+/**
+ * viewPostulation
+ * Crear vista para ver postulantes 
+ */
 Route::get('/empresa/viewPostulation/{id}', 'IndexEmpresaController@viewPostulation')->name('/empresa/viewPostulation/{id}');
+
 
 Route::get('/empresa/viewPostulationList', 'IndexEmpresaController@viewPostulationList')->name('/empresa/viewPostulationList');
 Route::get('/empresa/viewPostulationListTable', 'IndexEmpresaController@viewPostulationListTable')->name('/empresa/viewPostulationListTable');

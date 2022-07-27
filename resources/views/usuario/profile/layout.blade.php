@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Forms / Layouts - NiceAdmin Bootstrap Template</title>
+  <title>@yield('titulo')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -26,12 +26,14 @@
   <link href="{{url('/')}}/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="{{url('/')}}/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+
   <!-- Template Main CSS File -->
   <link href="{{url('/')}}/assets/css/style.css" rel="stylesheet">
 
   <style>
   ::-webkit-scrollbar {
-      width: 12px;
+      width: 17px;
   }
 
   ::-webkit-scrollbar-track {
@@ -41,8 +43,18 @@
 
   ::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+      -webkit-box-shadow: inset 0 0 6px #f19029; 
   }  
+
+  .list-group-item.active {
+
+    background-color: #f19029;
+    border-color: #f19029;
+  }
+
+  .list-group-item .active .d-flex .text-muted {
+      color:  white;
+  }
   </style>
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2

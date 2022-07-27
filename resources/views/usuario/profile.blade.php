@@ -1,5 +1,7 @@
 @extends('usuario.profile.layout')
-
+@section('titulo', 'Mis datos')
+@section('item-raiz', 'Perfil')
+@section('item-titulo', 'Mis datos')
 @section('content')
     <section class="section">
       <div class="row">
@@ -10,32 +12,64 @@
               <h5 class="card-title">Mis datos</h5>
 
               <!-- Multi Columns Form -->
-              <form class="row g-3">
+              <form method="POST" action="{{asset('/usuario/profile')}}" class="row g-3">
+                @csrf
                 <div class="col-md-6">
                   <label for="" class="form-label">Nombres</label>
-                  <input type="text" class="form-control" id="nombres" name="nombres" value="{{old('nombres', $user->nombres)}}">
+
+                  {{ Form::text('nombres', null, ['id' => 'nombres', 'class' => ($errors->has('nombres') ? 'form-control is-invalid' : 'form-control'), 'regexp' => "^[^0-9]+$"]) }}
+                  @if($errors->first('nombres'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('nombres')}}
+                  </div>
+                  @endif
                 </div>
                 <div class="col-md-3">
                   <label for="" class="form-label">Apellido Paterno</label>
-                  <input type="text" class="form-control" id="apellido_paterno" name="apellido_paterno" value="{{old('apellido_paterno', $user->apellido_paterno)}}">
+                  {{ Form::text('apellido_paterno', null, ['id' => 'apellido_paterno', 'class' => ($errors->has('apellido_paterno') ? 'form-control is-invalid' : 'form-control'), 'regexp' => "^[^0-9]+$"]) }}
+                  @if($errors->first('apellido_paterno'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('apellido_paterno')}}
+                  </div>
+                  @endif
                 </div>
                 <div class="col-md-3">
                   <label for="" class="form-label">Apellido Paterno</label>
-                  <input type="text" class="form-control" id="apellido_materno" name="apellido_materno" value="{{old('apellido_materno', $user->apellido_materno)}}">
+                  {{ Form::text('apellido_materno', null, ['id' => 'apellido_materno', 'class' => ($errors->has('apellido_materno') ? 'form-control is-invalid' : 'form-control'), 'regexp' => "^[^0-9]+$"]) }}
+                  @if($errors->first('apellido_materno'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('apellido_materno')}}
+                  </div>
+                  @endif
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Fecha de nacimiento</label>
-                  <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" placeholder="" value="{{old('fecha_nacimiento', $user->fechaNacimiento())}}">
+                  {{ Form::date('fecha_nacimiento', null, ['id' => 'fecha_nacimiento', 'class' => ($errors->has('fecha_nacimiento') ? 'form-control is-invalid' : 'form-control')]) }}
+                  @if($errors->first('fecha_nacimiento'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('fecha_nacimiento')}}
+                  </div>
+                  @endif
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" name="email" value="{{old('email', $user->email)}}">
+                  {{ Form::email('email', null, ['id' => 'email', 'class' => ($errors->has('email') ? 'form-control is-invalid' : 'form-control')]) }}
+                  @if($errors->first('email'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('email')}}
+                  </div>
+                  @endif
                 </div>
                 <div class="col-md-4">
                   <label for="inputAddress5" class="form-label">Número de contacto</label>
                   <div class="input-group mb-3">
                       <span class="input-group-text" id="basic-addon1">+56</span>
-                      <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" id="telefono" name="telefono" value="{{old('telefono', $user->telefono)}}">
+                      {{ Form::text('telefono', null, ['id' => 'telefono', 'class' => ($errors->has('telefono') ? 'form-control is-invalid' : 'form-control'), 'regexp' => "^[^0-9]+$", 'regexp' => "[0-9]{0,9}"]) }}
+                      @if($errors->first('telefono'))
+                      <div class="invalid-feedback">
+                        {{$errors->first('telefono')}}
+                      </div>
+                      @endif                      
                     </div>
                 </div>
                 <div class="col-12">
@@ -44,18 +78,22 @@
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">Región</label>
-                  <select id="region" name="region" class="form-select regiones">
-                    @foreach($regiones as $region)
-                    <option value="{{$region->region_id}}">{{$region->region_nombre}}</option>
-                    @endforeach
-                  </select>
+                  {{ Form::select('region', $regiones, null,['id' => 'region', 'class' => ($errors->has('region') ? 'form-control is-invalid regiones' : 'form-control regiones'), 'regexp' => "^[^0-9]+$", 'placeholder' => 'Seleccione una región']) }}
+                  @if($errors->first('region'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('region')}}
+                  </div>
+                  @endif                    
+ 
                 </div>
                 <div class="col-md-6">
                   <label for="inputState" class="form-label">Comúna</label>
-                  <select id="comuna" name="comuna" class="form-select comunas">
-                    <option selected></option>
-                    <option>...</option>
-                  </select>
+                  {{ Form::select('comuna', ['0' => '...'], null,['id' => 'comuna', 'class' => ($errors->has('comuna') ? 'comunas form-control is-invalid' : 'comunas form-control'), 'regexp' => "^[^0-9]+$", 'placeholder' => 'Seleccione una región', 'disabled' => 'disabled']) }}
+                  @if($errors->first('comuna'))
+                  <div class="invalid-feedback">
+                    {{$errors->first('comuna')}}
+                  </div>
+                  @endif 
                 </div>
                 <div class="col-12">
                   <div class="form-check">

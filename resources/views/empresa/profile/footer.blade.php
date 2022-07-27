@@ -27,6 +27,7 @@
   <script src="{{url('/')}}/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="{{url('/')}}/assets/vendor/php-email-form/validate.js"></script>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script src="{{asset('js/regex.js')}}"></script>
 
   
 

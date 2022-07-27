@@ -1,5 +1,7 @@
 @extends('usuario.profile.layout')
-
+@section('titulo', 'Mis capacidades')
+@section('item-raiz', 'Perfil')
+@section('item-titulo', 'Capacidades')
 @section('content')
     <section class="section">
       <div class="row">

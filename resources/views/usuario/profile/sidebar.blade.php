@@ -22,8 +22,8 @@ $currentRoute = Route::current()->getName()
           </a>
         </li>    
         <li>
-          <a href="{{url('usuario/disabilities')}}" class="">
-            <i class="bi bi-circle"></i><span>Mi experiencia</span>
+          <a href="javascript:void(0)" class="text-decoration-line-through">
+            <i class="bi bi-circle"></i><span  >Mi experiencia</span>
           </a>
         </li>             
       </ul>
@@ -32,12 +32,12 @@ $currentRoute = Route::current()->getName()
       </a>
       <ul id="forms-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="{{url('usuario/profile')}}" class="">
-            <i class="bi bi-circle"></i><span>Mis postulaciones</span>
+          <a href="javascript:void(0)" class="text-decoration-line-through">
+            <i class="bi bi-circle"></i><span >Mis postulaciones</span>
           </a>
         </li>
         <li>
-          <a href="{{url('usuario/disabilities')}}" class="">
+          <a href="{{url('usuario/viewPostulationList')}}" class="">
             <i class="bi bi-circle"></i><span>Nuevos empleos</span>
           </a>
         </li>        

@@ -25,8 +25,38 @@
   <script src="{{url('/')}}/assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="{{url('/')}}/assets/vendor/php-email-form/validate.js"></script>
   <script src="{{url('/')}}/js/jquery.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script src="{{asset('js/regex.js')}}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{url('/')}}/assets/js/main.js"></script>
 
+  <!-- Alertify -->
+  @if(session()->has('alertify')) 
+      <style type="text/css">
+        .ajs-success { 
+          color: white !important;  
+          
+          /*/
+          background-color: #d9edf7;  
+          border-color: #31708f; 
+          /*/
+        }
+      </style>
+      <script type="text/javascript">
+
+        $(document).ready(function(){
+
+          var delay = alertify.get('notifier','delay');
+          alertify.set('notifier','delay', 5);
+          alertify.set('notifier','position', 'top-right');
+          alertify.success('{{ session()->get('alertify') }}');
+          alertify.set('notifier','delay', delay);
+        });
+      </script>
+  @endif  
+  
   @yield('jsScripts')
+
+
+  

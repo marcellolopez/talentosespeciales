@@ -1075,3 +1075,30 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 13px;
   color: #151e3f;/*#012970;*/
 }
+/*
+.btn-naranjo {
+  color: #fff;
+  background-color: #FDC800 !important;
+  border-color: #FDC800 !important;
+}
+*/
+
+.btn-naranjo {
+
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: #fff;
+ /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #E3312D 0%, #FFEF26 51%, #E3312D 100%);
+ }
+
+
+.btn-naranjo:hover {
+  color: white;
+  background-position: right center; /* change the direction of the change here */
+}
+

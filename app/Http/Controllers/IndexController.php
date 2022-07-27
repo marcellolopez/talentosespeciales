@@ -12,6 +12,7 @@ use App\Models\TipoDiscapacidad;
 use App\Models\Postulacion;
 use Illuminate\Support\Facades\Hash;
 use Auth, URL, Route;
+use Illuminate\Support\Facades\Validator;
 
 class IndexController extends Controller
 {
@@ -24,13 +25,42 @@ class IndexController extends Controller
     } 
 
     public function profile(){
-
-        
-        $regiones = Region::all();
+        $regiones = Region::all()->pluck('region_nombre', 'region_id');
         $user = Auth::user();
         return view('usuario.profile', compact('user','regiones'));
     } 
 
+    public function updateProfile(Request $request){
+
+        $validator = $this->validateUpdateProfile($request); 
+        if($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        } 
+        return redirect()->route('/usuario/profile')->with(
+            [
+                'alertify'=> 'Los datos del postulante fueron actualizados con éxito',
+                'titulo' => 'Postulante'
+            ]);
+    } 
+
+    function validateUpdateProfile(Request $request){
+        $rules =array(
+            'nombres' => 'required|min:3|max:100',
+            'apellido_paterno' => 'required|max:100',
+            'apellido_materno' => 'required|max:100',
+            'fecha_nacimiento' => 'required',
+            'telefono' => 'required',
+            'direccion' => 'required|max:100',
+            'comuna' => 'required',
+        );
+        $messages = [
+            'nombres.required' => 'El título es requerido',
+            'nombres.max' => 'El título debe contener un máximo de 100 caracteres',
+        ];
+        return Validator::make($request->all(),$rules,$messages);
+    }    
     public function disabilities(){
         
         $tipo_discapacidad = TipoDiscapacidad::whereIn('id',[1,2,3,4,5])->get();
