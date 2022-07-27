@@ -12,7 +12,6 @@ class Postulacion extends Model
     protected $table = 'postulaciones';
 
     public function fechaPublicacion(){
-
         $startTime = Carbon::parse($this->created_at);
         $finishTime = Carbon::parse(now());
         $mensaje = "Hace ";
