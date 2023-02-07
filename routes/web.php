@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LoginEmpresaController;
+use App\Http\Controllers\IndexEmpresaController;
+use App\Http\Controllers\HelperController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +20,8 @@ use App\Http\Controllers\Auth\LoginController;
 */
 Route::get('phpinfo', function () {
    return phpinfo();
-})->name('phpinfo');
+})
+->name('phpinfo');
 
 //cambiar color #f78701
 
@@ -135,7 +140,8 @@ Route::get('/usuario/register', [IndexController::class, 'register']);
 
 Route::post('/usuario/register', [IndexController::class, 'insertRegister']);
 
-Route::get('/usuario/profile', [IndexController::class, 'profile'])->name('/usuario/profile')->middleware('canAccessPostulante');
+Route::get('/usuario/profile', [IndexController::class, 'profile'])
+->name('/usuario/profile')->middleware('canAccessPostulante');
 
 Route::post('/usuario/profile', [IndexController::class, 'updateProfile'])->middleware('canAccessPostulante');
 
@@ -143,22 +149,26 @@ Route::post('/usuario/profile', [IndexController::class, 'updateProfile'])->midd
  * al guardar, abrir popup aceptando que los datos son reales.
  * Mientras esta información no se encuentre, no podrá ingresar a nuevos empleos
  */
-Route::get('/usuario/disabilities', 'IndexController@disabilities')->name('/usuario/disabilities')->middleware('canAccessPostulante');
+Route::get('/usuario/disabilities', [IndexController::class, 'disabilities'])
+->name('/usuario/disabilities')->middleware('canAccessPostulante');
 
-Route::get('/usuario/education', 'IndexController@education')->name('/usuario/education')->middleware('canAccessPostulante');
+Route::get('/usuario/education', [IndexController::class, 'education')
+->name('/usuario/education')]->middleware('canAccessPostulante');
 
-Route::post('/usuario/education', 'IndexController@insertEducation')->middleware('canAccessPostulante');
-
-
-Route::get('/usuario/work', 'IndexController@work')->name('/usuario/work')->middleware('canAccessPostulante');
-
-Route::post('/usuario/work', 'IndexController@insertWork')->middleware('canAccessPostulante');
+Route::post('/usuario/education', [IndexController::class, 'insertEducation'])->middleware('canAccessPostulante');
 
 
+Route::get('/usuario/work', [IndexController::class, 'work'])
+->name('/usuario/work')->middleware('canAccessPostulante');
 
-Route::get('/usuario/other', 'IndexController@other')->name('/usuario/other')->middleware('canAccessPostulante');
+Route::post('/usuario/work', [IndexController::class, 'insertWork'])->middleware('canAccessPostulante');
 
-Route::post('/usuario/other', 'IndexController@insertOther')->middleware('canAccessPostulante');
+
+
+Route::get('/usuario/other', [IndexController::class, 'other'])
+->name('/usuario/other')->middleware('canAccessPostulante');
+
+Route::post('/usuario/other', [IndexController::class, 'insertOther'])->middleware('canAccessPostulante');
 /**
  * viewPostulationList
  * botón aviso debe contener:
@@ -166,10 +176,12 @@ Route::post('/usuario/other', 'IndexController@insertOther')->middleware('canAcc
  * nombre empresa
  * ubicación del trabajo
  */
-Route::get('/usuario/viewPostulationList', 'IndexController@viewPostulationList')->name('/usuario/viewPostulationList')->middleware('canAccessPostulante');
-Route::get('/usuario/viewMyPostulationList', 'IndexController@viewMyPostulationList')->name('/usuario/viewMyPostulationList')->middleware('canAccessPostulante');
-Route::post('/usuario/ajaxViewPostulation', 'IndexController@ajaxViewPostulation');
-Route::post('/usuario/ajaxSavePostulation', 'IndexController@ajaxSavePostulation');
+Route::get('/usuario/viewPostulationList', [IndexController::class, 'viewPostulationList'])
+->name('/usuario/viewPostulationList')->middleware('canAccessPostulante');
+Route::get('/usuario/viewMyPostulationList', [IndexController::class, 'viewMyPostulationList'])
+->name('/usuario/viewMyPostulationList')->middleware('canAccessPostulante');
+Route::post('/usuario/ajaxViewPostulation', [IndexController::class, 'ajaxViewPostulation']);
+Route::post('/usuario/ajaxSavePostulation', [IndexController::class, 'ajaxSavePostulation']);
 
 
 
@@ -177,11 +189,14 @@ Route::post('/usuario/ajaxSavePostulation', 'IndexController@ajaxSavePostulation
 /**
  * Empresas
  */
-Route::get('/empresa/login', 'Auth\LoginEmpresaController@login')->name('/empresa/login');
+Route::get('/empresa/login', [Auth\LoginEmpresaController::class,'login'])
+->name('/empresa/login');
 
-Route::post('/empresa/loginForm', 'Auth\LoginEmpresaController@authenticate')->name('/empresa/loginForm');
+Route::post('/empresa/loginForm', [Auth\LoginEmpresaController::class,'authenticate'])
+->name('/empresa/loginForm');
 
-Route::get('/empresa/profile', 'IndexEmpresaController@profile')->name('/empresa/profile');
+Route::get('/empresa/profile', [IndexEmpresaController::class, 'profile'])
+->name('/empresa/profile');
 
 /**
  * viewCreatePostulation
@@ -195,15 +210,18 @@ Route::get('/empresa/profile', 'IndexEmpresaController@profile')->name('/empresa
  * 
  * Al crear postulación 24 para mnodificar título y fecha (dar aviso al crear)
  */
-Route::get('/empresa/viewCreatePostulation', 'IndexEmpresaController@viewCreatePostulation')->name('/empresa/viewCreatePostulation');
+Route::get('/empresa/viewCreatePostulation', [IndexEmpresaController::class, 'viewCreatePostulation'])
+->name('/empresa/viewCreatePostulation');
 
-Route::post('/empresa/createPostulation', 'IndexEmpresaController@createPostulation')->name('/empresa/createPostulation');
+Route::post('/empresa/createPostulation', [IndexEmpresaController::class, 'createPostulation'])
+->name('/empresa/createPostulation');
 
 /**
  * viewPostulation
  * Crear vista para ver postulantes 
  */
-Route::get('/empresa/viewPostulation/{id}', 'IndexEmpresaController@viewPostulation')->name('/empresa/viewPostulation/{id}');
+Route::get('/empresa/viewPostulation/{id}', [IndexEmpresaController::class, 'viewPostulation'])
+->name('/empresa/viewPostulation/{id}');
 
 
 
@@ -212,8 +230,10 @@ Route::get('/empresa/viewPostulation/{id}', 'IndexEmpresaController@viewPostulat
  * bloquear fecha inicio
  * Bloquear el título 
  */
-Route::get('/empresa/viewPostulationList', 'IndexEmpresaController@viewPostulationList')->name('/empresa/viewPostulationList');
-Route::get('/empresa/viewPostulationListTable', 'IndexEmpresaController@viewPostulationListTable')->name('/empresa/viewPostulationListTable');
+Route::get('/empresa/viewPostulationList', [IndexEmpresaController::class, 'viewPostulationList'])
+->name('/empresa/viewPostulationList');
+Route::get('/empresa/viewPostulationListTable', [IndexEmpresaController::class, 'viewPostulationListTable'])
+->name('/empresa/viewPostulationListTable');
 
 
 
@@ -223,7 +243,7 @@ Route::get('/empresa/viewPostulationListTable', 'IndexEmpresaController@viewPost
 
 
 
-Route::get('/usuario/createUser', 'IndexController@createUser');
-Route::get('/usuario/createEmpresa', 'IndexController@createEmpresa');
+Route::get('/usuario/createUser', [IndexController::class, 'createUser']);
+Route::get('/usuario/createEmpresa', [IndexController::class, 'createEmpresa']);
 
-Route::get('getComunas', 'HelperController@getComunas');
+Route::get('getComunas', [HelperController::class, 'getComunas']);
