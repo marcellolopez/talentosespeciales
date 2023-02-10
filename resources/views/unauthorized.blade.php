@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-body">
                     <h1>Sin autorización</h1>
-                    <p>{{isset($message) ? $message : 'Usted no puede acceder a esta página' }}</p>
+                    <p>Usted no puede acceder a esta página</p>
                 </div>
             </div>
         </div>

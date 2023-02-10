@@ -185,7 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
-        //Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -194,8 +194,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        //Collective\Html\HtmlServiceProvider::class,
-        //Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        Freshwork\ChileanBundle\Laravel\ChileanBundleServiceProvider::class,
 
 
     ],
@@ -213,8 +213,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        //'Html' => Collective\Html\HtmlFacde::class,
-        //'Rut'   => Freshwork\ChileanBundle\Laravel\Facades\Rut::class,
+        'Html' => Collective\Html\HtmlFacde::class,
+        'Rut'   => Freshwork\ChileanBundle\Laravel\Facades\Rut::class,
     ])->toArray(),
 
 ];

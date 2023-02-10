@@ -152,8 +152,8 @@ Route::post('/usuario/profile', [IndexController::class, 'updateProfile'])->midd
 Route::get('/usuario/disabilities', [IndexController::class, 'disabilities'])
 ->name('/usuario/disabilities')->middleware('canAccessPostulante');
 
-Route::get('/usuario/education', [IndexController::class, 'education')
-->name('/usuario/education')]->middleware('canAccessPostulante');
+Route::get('/usuario/education', [IndexController::class, 'education'])
+->name('/usuario/education')->middleware('canAccessPostulante');
 
 Route::post('/usuario/education', [IndexController::class, 'insertEducation'])->middleware('canAccessPostulante');
 

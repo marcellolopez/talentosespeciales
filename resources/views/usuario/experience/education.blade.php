@@ -16,6 +16,7 @@
                   </div>
                   <div class="float-end mr-2">
                     <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modalAgregarExperiencia">Agregar experiencia</button>
+
                   </div>
                 </h5>
                 @if(session()->has('warning'))
@@ -27,17 +28,27 @@
               </div>
               <div class="row">
                 @forelse ($educacion as $e)
-                <div class="alert border-dark" role="alert">
+                <div class="alert" role="alert">
+                  <a href="/usuario/profile" class="btn btn-light btn-delete ms-2 float-end">
+                    <i class="fa-solid fa-trash fa-xs"></i>
+                  </a>  
+
+                  <a href="/usuario/profile" class="btn btn-light btn-edit ms-2 float-end">
+                    <i class="fa-solid fa-pencil fa-xs"></i>
+                  </a>
+
                   <h4 class="alert-heading">{{$e->titulo}}</h4>
+
                   @if($e->grado != null)
                   <h6>Grado {{$e->grado->grado}}</h6>
                   @endif
                   <h5 class="text-muted">{{$e->institucion_educativa}}</h5>
                   <p>{{$e->fechaInicio()}} - {{$e->fechaTermino()}}</p>
                   <hr>
-                  <p class="mb-0">{{$e->descripcion}}</p>
-                  
+                  <p class="mb-0">{{$e->descripcion}}</p> 
+
                 </div>
+
                 @empty
                     <p class="bg-danger text-white p-3 ">No tiene experiencias educacionales creadas.</p>
                 @endforelse

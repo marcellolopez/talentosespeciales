@@ -31,6 +31,8 @@
   <!-- Template Main CSS File -->
   <link href="/assets/css/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <style>
   ::-webkit-scrollbar {
       width: 17px;
@@ -83,6 +85,19 @@
   </main>
   <!-- End #main -->
   @include('usuario.profile.footer')
+
+  <style>
+    .btn-edit:hover{
+      color:white !important;
+      background-color: blue !important;
+    }
+
+    .btn-delete:hover{
+      color:white !important;
+      background-color: red !important;
+    }
+
+  </style>
  
 
 </body>
