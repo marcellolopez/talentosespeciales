@@ -7,9 +7,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-body" style="max-height: 470px">
+            <div class="card-body" >
               <div class="row mt-2 mb-2">
-                <div class="col-md-4 overflow-auto " style="max-height: 400px">
+                <div class="col-md-4 overflow-auto " style="max-height: 600px">
                   <div class="list-group">
                     @foreach ($postulaciones as $key => $postulacion)
                     
@@ -33,7 +33,7 @@
                     </div>
                   </div>                
                 </div>
-                <div class="col-md-8 overflow-auto viewPostulacion mb-2" style="max-height: 400px;">
+                <div class="col-md-8 overflow-auto viewPostulacion mb-2" style="height: 400px;">
                   <div class="row">
                     <div class=" col text-center text-nowrap mt-1">
                       <i class="bi bi-clock"></i> <label class="verTipoJornada" for=""></label>
@@ -59,9 +59,13 @@
 @section('jsScripts')
 <script>
     $( document ).ready(function() {
+      /*/
         $('.viewPostulacion').hide();
+
         $('body').addClass('toggle-sidebar');
+      /*/
         $('.postulacion:first').click();
+
     });
   function ajaxViewPostulation($id){
     $.ajax({

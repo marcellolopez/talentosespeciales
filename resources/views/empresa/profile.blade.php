@@ -11,13 +11,21 @@
 
               <!-- Multi Columns Form -->
               <form class="row g-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="" class="form-label">Rut de la empresa</label>
                   <input type="text" class="form-control" id="rut" name="rut" value="{{old('rut', $user->rut)}}">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <label for="" class="form-label">Razón social</label>
-                  <input type="text" class="form-control" id="razon_social" name="razon_social" value="{{old('razon_social', $user->razon_social)}}">
+                  <input type="text" class="form-control" id="contacto" name="contacto" value="{{old('contacto', $user->contacto)}}">
+                </div>
+                <div class="col-md-4">
+                  <label for="" class="form-label">Nombre de contacto</label>
+                  <input type="text" class="form-control" id="contacto" name="contacto" value="{{old('contacto', $user->contacto)}}">
+                </div>                
+                <div class="col-12">
+                  <label for="" class="form-label">Descripción</label>
+                  <textarea class="form-control" id="message" type="text" id="descripcion" name="descripcion"value="{{old('descripcion', $user->descripcion)}}" style="height: 10rem" data-sb-validations="required"></textarea>
                 </div>
                 <div class="col-md-4">
                   <label for="" class="form-label">Email</label>

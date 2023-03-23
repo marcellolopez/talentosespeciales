@@ -45,7 +45,6 @@
                   <h5 class="text-muted">{{$e->institucion_educativa}}</h5>
                   <p>{{$e->fechaInicio()}} - {{$e->fechaTermino()}}</p>
                   <hr>
-                  <p class="mb-0">{{$e->descripcion}}</p> 
 
                 </div>
 

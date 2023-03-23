@@ -31,9 +31,9 @@
                   <h4 class="alert-heading">{{$o->nombre}}</h4>
                   <h5 class="text-muted">{{$o->institucion}}</h5>
                   <p>{{$o->fechaInicio()}} - {{$o->fechaTermino()}}</p>
-                  <hr>
+
                   <p class="mb-0">{{$o->descripcion}}</p>
-                  
+                  <hr>
                 </div>
                 @empty
                     <p class="bg-danger text-white p-3 ">No tiene experiencias creadas.</p>

@@ -28,18 +28,63 @@ Route::get('phpinfo', function () {
 
 
 /**
- * Sacar descripción en education
- * 
- * no requerido descripción en laboral
- * 
- * no requerido descripción en otras
+ * ajustes postulante
  * 
  * 
- * postulaciones usuario
- * botón dejar de postular
- * cambiar a expirar cuando termine plazo
+ * 
+ * 
+ * 
+ * Sacar descripción en education OK
+ * 
+ * no requerido descripción en laboral OK
+ * 
+ * no requerido descripción en otras OK
+ * 
+ * no desarparecer sidebar en postulaciones - postulante OK
+ * colocar flechita
+ * 
+ * 
+ * 
+ * 
+ * postulaciones usuario 
+ * 
+ * botón dejar de postular OK
+ * cambiar a expirar cuando termine plazo (por hacer)
  */
 
+
+/**
+ * ajuste empresa
+ * 
+ * agregtar nombre de contacto en form empresa OK
+ * agregar descreipción de la empresa OK
+ * 
+ * 
+ * 
+ * en postulación, bajar íconos y mostrar ubicación del trabajo
+ * 
+ * 
+ * breadcums - ajustar url
+ * cambiar títulos de form layout
+ * 
+ * agregar vacantes a oferta de empleo
+ * 
+ * 
+ * agregar subir logo a empresa
+ * investigar librería imagen cuadrada
+ * 
+ * 
+ * agregar acciones a postulaciones
+ * -ver postulacion
+ * -ver postulantes
+ * -editar
+ * -eliminar
+ * 
+ * vsita postulación
+ * -eliminar postulación
+ * -editar postulación
+ * 
+ */
 
 /* usuario */
 //Jueves 24 de Noviembre
@@ -182,6 +227,7 @@ Route::get('/usuario/viewMyPostulationList', [IndexController::class, 'viewMyPos
 ->name('/usuario/viewMyPostulationList')->middleware('canAccessPostulante');
 Route::post('/usuario/ajaxViewPostulation', [IndexController::class, 'ajaxViewPostulation']);
 Route::post('/usuario/ajaxSavePostulation', [IndexController::class, 'ajaxSavePostulation']);
+Route::post('/usuario/ajaxDeletePostulation', [IndexController::class, 'ajaxDeletePostulation']);
 
 
 
@@ -189,10 +235,10 @@ Route::post('/usuario/ajaxSavePostulation', [IndexController::class, 'ajaxSavePo
 /**
  * Empresas
  */
-Route::get('/empresa/login', [Auth\LoginEmpresaController::class,'login'])
+Route::get('/empresa/login', [App\Http\Controllers\Auth\LoginEmpresaController::class,'login'])
 ->name('/empresa/login');
 
-Route::post('/empresa/loginForm', [Auth\LoginEmpresaController::class,'authenticate'])
+Route::post('/empresa/loginForm', [App\Http\Controllers\Auth\LoginEmpresaController::class,'authenticate'])
 ->name('/empresa/loginForm');
 
 Route::get('/empresa/profile', [IndexEmpresaController::class, 'profile'])

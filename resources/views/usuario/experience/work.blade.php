@@ -27,13 +27,13 @@
               </div>
               <div class="row">
                 @forelse ($laboral as $l)
-                <div class="alert border-dark {{$l->trabajo_actual == 1 ? '' : 'border-0'}}" role="alert">
+                <div class="alert" role="alert">
                   <h4 class="alert-heading">{{$l->cargo}}</h4>
                   <h5 class="text-muted">{{$l->empresa}}</h5>
                   <p>{{$l->fechaInicio()}} - {{$l->trabajo_actual == 0 ? $l->fechaTermino() : 'Trabajo aquí actualmente'}}</p>
-                  <hr>
-                  <p class="mb-0">{{$l->descripcion}}</p>
                   
+                  <p class="mb-0">{{$l->descripcion}}</p>
+                  <hr>
                 </div>
                 @empty
                     <p class="bg-danger text-white p-3 ">No tiene experiencias laborales creadas.</p>

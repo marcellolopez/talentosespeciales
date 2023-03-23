@@ -212,7 +212,6 @@ class IndexController extends Controller
     } 
 
     public function ajaxSavePostulation(Request $request){
-        //dd($request->all());
         $user = Auth::guard('web')->user();
         $usuario_postulacion = new UsuarioPostulacion();
         $usuario_postulacion->usuario_id = $user->id;
@@ -226,6 +225,17 @@ class IndexController extends Controller
         }
     } 
 
+    public function ajaxDeletePostulation(Request $request){
+        $user = Auth::guard('web')->user();
+        $usuario_postulacion = UsuarioPostulacion::where('usuario_id',$user->id)->where('postulacion_id',$request->id);
+
+        if($usuario_postulacion->delete()){
+            return response()->json(['status' => '200']);
+        }
+        else{
+            return response()->json(['status' => '500']);
+        }
+    } 
 
     public function education(){
         $user = Auth::guard('web')->user();
