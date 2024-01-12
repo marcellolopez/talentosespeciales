@@ -23,142 +23,6 @@ Route::get('phpinfo', function () {
 })
 ->name('phpinfo');
 
-//cambiar color #f78701
-
-
-
-/**
- * ajustes postulante
- * 
- * 
- * 
- * 
- * 
- * Sacar descripción en education OK
- * 
- * no requerido descripción en laboral OK
- * 
- * no requerido descripción en otras OK
- * 
- * no desarparecer sidebar en postulaciones - postulante OK
- * colocar flechita
- * 
- * 
- * 
- * 
- * postulaciones usuario 
- * 
- * botón dejar de postular OK
- * cambiar a expirar cuando termine plazo (por hacer)
- */
-
-
-/**
- * ajuste empresa
- * 
- * agregtar nombre de contacto en form empresa OK
- * agregar descreipción de la empresa OK
- * 
- * 
- * 
- * en postulación, bajar íconos y mostrar ubicación del trabajo
- * 
- * 
- * breadcums - ajustar url
- * cambiar títulos de form layout
- * 
- * agregar vacantes a oferta de empleo
- * 
- * 
- * agregar subir logo a empresa
- * investigar librería imagen cuadrada
- * 
- * 
- * agregar acciones a postulaciones
- * -ver postulacion
- * -ver postulantes
- * -editar
- * -eliminar
- * 
- * vsita postulación
- * -eliminar postulación
- * -editar postulación
- * 
- */
-
-/* usuario */
-//Jueves 24 de Noviembre
-//mis postulaciones
-//nuevas postulaciones
-//OK
-/**
- * Falta agregar preguntas
- */
-
-
-
-
-//experiencia
-
-//estudio
-/**
- * institucion, 
- * título, 
- * grado,
- * año de inicio
- * año de termino
- * (ordenar por año DESC)
- * 
- * 
- * Como llamar a este campo?
- * (
- * Escolar incompleta, 
- * Escolar completa , 
- * Técnico incompleta, 
- * Técnico completa, 
- * Universidad incompleta , 
- * Universidad completa , 
- * postgrado
- * ) ordenar incompleta - completa
- */
-
-
-//laboral
-/**
- * año-mes (desde -|- hasta) * trabajo aquí altuaclmente (Bloquear Hasta, si se da el caso)
- * empresa, 
- * cargo, 
- * descripción del cargo
- */
-//Otras experiencias
-/**
- * nombre
- * nivel (básico - medio - avanzado)
- * fecha de duración
- * descripción
- */
-
-//guardar capacidades
-//usuario postular a empleo
-
-
-/*empresa*/
-//login
-/**
- * debe poder tener varias cuentas para una sola empresa asociada y tambien asociar roles.(etapa 2)
- */
-//datos de la empresa
-//crear oferta laboral
-    //agregar preguntas a postulaciones
-//historial de ofertas 
-    //ver oferta
-    //editar oferta
-    //ver postulantes a la oferta
-        //ingresar a su perfil
-        //descargar cv (2da etapa)
-        //agregar comentarios de la empresa para el usuario (2da etapa)
-
-
 Route::get('/', [IndexController::class, 'index']);
 
 Route::post('/buscarEmpleo', [IndexController::class, 'searchPostulationList']);
@@ -190,12 +54,13 @@ Route::get('/usuario/profile', [IndexController::class, 'profile'])
 
 Route::post('/usuario/profile', [IndexController::class, 'updateProfile'])->middleware('canAccessPostulante');
 
-/**
- * al guardar, abrir popup aceptando que los datos son reales.
- * Mientras esta información no se encuentre, no podrá ingresar a nuevos empleos
- */
+## Ver disabilities
 Route::get('/usuario/disabilities', [IndexController::class, 'disabilities'])
 ->name('/usuario/disabilities')->middleware('canAccessPostulante');
+
+## Guardar diabilities
+Route::post('/usuario/saveDisabilities', [IndexController::class, 'saveDisabilities'])
+->name('/usuario/saveDisabilities')->middleware('canAccessPostulante');
 
 Route::get('/usuario/education', [IndexController::class, 'education'])
 ->name('/usuario/education')->middleware('canAccessPostulante');

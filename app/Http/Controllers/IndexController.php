@@ -16,6 +16,7 @@ use App\Models\Educacion;
 use App\Models\Laboral;
 use App\Models\Grado;
 use App\Models\OtraExperiencia;
+use App\Models\UsuarioPreguntaRespuestaDiscapacidad;
 use Illuminate\Support\Facades\Hash;
 use Auth, URL, Route, DB;
 use Illuminate\Support\Facades\Validator;
@@ -85,7 +86,7 @@ class IndexController extends Controller
         $user->apellido_paterno      = $request->apellido_paterno;
         $user->apellido_materno      = $request->apellido_materno;
         $user->fecha_nacimiento      = $request->fecha_nacimiento;
-        $user->telefono      = $request->telefono;
+        $user->telefono       = $request->telefono;
         $user->direccion      = $request->direccion;
         $user->comuna_id      = $request->comuna;
         $user->region_id      = $request->region;
@@ -103,6 +104,13 @@ class IndexController extends Controller
         
         $tipo_discapacidad = TipoDiscapacidad::whereIn('id',[1,2,3,4,5])->get();
         $array_preguntas = array();
+        
+        ## Consultar al modelo UsuarioPreguntaRespuestaDiscapacidad si el usuario_id es igual a $user
+        ## y hacer un pluck
+        $user = Auth::guard('web')->user();
+        ## Consultar al modelo UsuarioPreguntaRespuestaDiscapacidad si el usuario_id es igual a $user y me devuelva un array donde el indice sea la pregunta_id y el valor la respuesta_id
+        $discapacidades = UsuarioPreguntaRespuestaDiscapacidad::where('usuario_id',$user->id)->pluck('respuesta_id', 'pregunta_id');
+
         foreach ($tipo_discapacidad as $tipo ) {
             $preguntas = Pregunta::where('tipo_discapacidad_id',$tipo->id)->orderBy('orden')->get();
 
@@ -110,9 +118,10 @@ class IndexController extends Controller
                 foreach ($preguntas as $pregunta) {
                     $array_preguntas[$tipo->id][$pregunta->id]['pregunta_id'] = $pregunta->id;
                     $array_preguntas[$tipo->id][$pregunta->id]['pregunta'] = $pregunta->pregunta;
-                    $array_preguntas[$tipo->id][$pregunta->id]['tipo_respuesta_id'] = $pregunta->tipo_respuesta_id;
+                    $array_preguntas[$tipo->id][$pregunta->id]['tipo_respuesta_id'] = $pregunta->tipo_respuesta_id;                    
+                    $array_preguntas[$tipo->id][$pregunta->id]['checked'] = isset($discapacidades[$pregunta->id]) ? $discapacidades[$pregunta->id] : null;
                 }
-                
+
             }
         }
         $respuestas = Respuesta::all();
@@ -124,6 +133,36 @@ class IndexController extends Controller
 
         return view('usuario.disabilities', compact('tipo_discapacidad', 'array_preguntas', 'array_respuestas'));
     }     
+
+    /**
+     * Función que me permite guardar las disabilities seleccionadas por el usuario
+     */
+    public function saveDisabilities(Request $request){
+
+        $user = Usuario::find(Auth::guard('web')->user()->id);
+        ## Eliminar todos los registros del modelo UsuarioPreguntaRespuestaDiscapacidad si el usuario_id es igual a $user
+        UsuarioPreguntaRespuestaDiscapacidad::where('usuario_id', $user->id)->delete();
+
+        ## Recorrer el array $request y guardar cada uno de los registros
+        foreach ($request->all() as $key => $value) {
+            if ($key == '_token')
+                continue;
+
+            if($value != null){
+                $discapacidad = new UsuarioPreguntaRespuestaDiscapacidad();
+                $discapacidad->usuario_id = $user->id;
+                $discapacidad->pregunta_id = $key;
+                $discapacidad->respuesta_id = $value;
+                $discapacidad->save();
+            }
+        }
+
+        return redirect()->route('/usuario/disabilities')->with(
+        [
+            'alertify'=> 'Tus opciones fueron guardadas con éxitos',
+            'titulo' => 'Mis capacidades'
+        ]);        
+    }
 
     public function viewPostulationList(){
         $user = Usuario::where('id',Auth::guard('web')->user()->id)

@@ -9,39 +9,41 @@
           <div class="card">
             <div class="card-body">
               <div class="accordion accordion-flush" id="accordionFlushExample">
-                @foreach($tipo_discapacidad as $tipo)
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-heading{{$tipo->id}}">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$tipo->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
-                      <h5 >{{$tipo->tipo}}</h5>
-                    </button>
-                    </h2>
-                    <div id="flush-collapse{{$tipo->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$tipo->id}}" data-bs-parent="#accordionFlushExample">
-                      <div class="accordion-body">                      
-                          @foreach($array_preguntas[$tipo->id] as $pregunta)
-                            <p>{{$pregunta['pregunta']}}</p>
-                            <div class="col-sm-10 mb-2">
-                              @foreach($array_respuestas[$pregunta['tipo_respuesta_id']] as $respuestas)
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="{{$pregunta['pregunta']}}" id="{{$pregunta['pregunta']}}" value="{{$respuestas['id']}}">
-                                <label class="form-check-label" for="1">
-                                  {{$respuestas['respuesta']}}
-                                </label>
+                <form action="{{route('/usuario/saveDisabilities')}}"  method="POST">
+                  @csrf
+                  @foreach($tipo_discapacidad as $tipo)
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-heading{{$tipo->id}}">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$tipo->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                        <h5 >{{$tipo->tipo}}</h5>
+                      </button>
+                      </h2>
+                      <div id="flush-collapse{{$tipo->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$tipo->id}}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">                      
+                            @foreach($array_preguntas[$tipo->id] as $pregunta)
+                              <p>{{$pregunta['pregunta']}}</p>
+                              <div class="col-sm-10 mb-2">
+                                @foreach($array_respuestas[$pregunta['tipo_respuesta_id']] as $respuestas)
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="{{$pregunta['pregunta_id']}}" id="{{$pregunta['pregunta_id']}}" value="{{$respuestas['id']}}" {{$pregunta['checked'] == $respuestas['id'] ? 'checked' :''}}>
+                                  <label class="form-check-label" for="1">
+                                    {{$respuestas['respuesta']}}
+                                  </label>
+                                </div>
+                                @endforeach
                               </div>
-                              @endforeach
-                            </div>
-                          @endforeach
+                            @endforeach
+                        </div>
                       </div>
                     </div>
+                  @endforeach
+                  <!-- Button trigger modal -->
+                  <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      Guardar cambios
+                    </button>
                   </div>
-                @endforeach
-                <!-- Button trigger modal -->
-                <div class="d-grid gap-2 col-6 mx-auto">
-                  <button type="button" class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Guardar cambios
-                  </button>
-                </div>
-
+                </form>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-xl">
